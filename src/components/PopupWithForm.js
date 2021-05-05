@@ -1,10 +1,10 @@
 export default function PopupWithForm(props) {
   const openedClass = props.isOpen ? "popup_opened" : "";
-  
+
   return (
     <section className={`popup popup_type_${props.name} ${openedClass}`}>
       <div className="popup__container">
-        <h2 className="popup__title">{props.title}</h2>
+        {props.title && <h2 className="popup__title">{props.title}</h2>}
         <button
           type="reset"
           aria-label="Close"
@@ -20,18 +20,18 @@ export default function PopupWithForm(props) {
           method="post"
         >
           {props.children}
-          <button
-            name="submit"
-            type="submit"
-            className="popup__btn-submit"
-            value="Сохранить"
-          >
-            {props.btnName}
-          </button>
+          {props.btnName && (
+            <button
+              name="submit"
+              type="submit"
+              className="popup__btn-submit"
+              value="Сохранить"
+            >
+              {props.btnName}
+            </button>
+          )}
         </form>
       </div>
     </section>
   );
 }
-
-

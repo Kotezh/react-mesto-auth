@@ -4,7 +4,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 export default function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-
   return (
     <main className="content">
       <section className="profile">
@@ -49,4 +48,3 @@ export default function Main(props) {
     </main>
   );
 }
-

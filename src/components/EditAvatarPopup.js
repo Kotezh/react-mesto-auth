@@ -16,7 +16,7 @@ export default function EditAvatarPopup(props) {
   return (
     <PopupWithForm
       title="Обновить аватар"
-      name="type_avatar"
+      name="avatar"
       isOpen={props.isOpen}
       onClose={props.onClose}
       onSubmit={handleSubmit}

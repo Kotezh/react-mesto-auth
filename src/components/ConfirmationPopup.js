@@ -5,7 +5,7 @@ export default function ConfirmationPopup(props) {
   return (
     <PopupWithForm
       title="Вы уверены?"
-      name="type_confirm"
+      name="confirm"
       isOpen={props.isOpen}
       onClose={props.onClose}
       btnName="Да"

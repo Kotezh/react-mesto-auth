@@ -12,7 +12,7 @@ export default function EditProfilePopup(props) {
       setName(currentUser.name);
       setDescription(currentUser.about);
     }
-  }, [props.isOpen]);
+  }, [currentUser, props.isOpen]);
 
   function handleChange(e) {
     if (e.target.name === "name") {

@@ -8,6 +8,7 @@
   -webkit-transition: opacity 200ms ease-in-out, fill 200ms ease-in-out;
   -o-transition: opacity 200ms ease-in-out, fill 200ms ease-in-out;
   transition: opacity 200ms ease-in-out, fill 200ms ease-in-out;
+  display: none;
 }
 
 .element__trash:hover {

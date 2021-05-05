@@ -5,11 +5,14 @@ export default function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwn = props.card.owner._id === currentUser._id;
-  const cardDeleteButtonClassName = `${isOwn && "trash element__trash"}`;
+  const cardDeleteButtonClassName = `trash element__trash ${
+    isOwn && "element__trash_active"
+  }`;
 
   const isLiked = props.card.likes.some((i) => i._id === currentUser._id);
   const cardLikeButtonClassName = `heart element__heart ${
-    isLiked ? "heart_active" : ""}`;
+    isLiked ? "heart_active" : ""
+  }`;
 
   function handleClick() {
     props.onCardClick(props.card);
@@ -26,18 +29,13 @@ export default function Card(props) {
   return (
     <li className="element">
       <div className="element__image-wrapper">
-        <a
-          className="element__popup"
-          href="#"
-          target="_self"
-          onClick={handleClick}
-        >
+        <div className="element__popup" onClick={handleClick}>
           <img
             className="element__image"
             alt={props.card.title}
             src={props.card.link}
           />
-        </a>
+        </div>
       </div>
       <div className="element__field">
         <h2 className="element__title">{props.card.name}</h2>
@@ -62,5 +60,3 @@ export default function Card(props) {
     </li>
   );
 }
-
-

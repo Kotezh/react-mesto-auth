@@ -1,8 +1,9 @@
-.page__container {
-  padding: 0 0 60px;
-  max-width: 880px;
-  min-width: 320px;
-  min-height: 100vh;
+.sign__container {
+  padding: 20px 35px 37px;
+  margin: 0 auto;
+  min-width: 430px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,12 +11,11 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin: 0 auto;
-  justify-content: space-between;
 }
 
 @media screen and (max-width: 625px) {
-  .page__container {
-    padding: 0 0 33px;
+  .sign__container {
+    min-width: 282px;
+    padding: 25px 22px;
   }
 }
