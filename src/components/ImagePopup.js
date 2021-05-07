@@ -7,8 +7,10 @@ export default function ImagePopup(props) {
   const openedClass = props.card ? "popup_opened" : "";
 
   useEffect(() => {
-    props.card && setLink(props.card.link);
-    props.card && setName(props.card.name);
+    if(props.card) {
+      setLink(props.card.link);
+      setName(props.card.name);
+    }
   }, [props.card]);
 
   return (

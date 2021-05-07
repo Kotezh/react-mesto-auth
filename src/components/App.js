@@ -105,11 +105,8 @@ export default function App() {
   function handleCardDelete(card) {
     api
       .deleteCard(card._id)
-      .then((res) => {
-        const newArray = cards.filter(
-          (currentCard) => currentCard._id !== card._id
-        );
-        setCards(newArray);
+      .then(() => {
+        setCards((cards) => cards.filter((currentCard) => currentCard._id !== card._id));
       })
       .catch((err) => {
         console.log(err);
@@ -160,16 +157,17 @@ export default function App() {
   function handleRegister(email, password) {
     auth
       .register(email, password)
-      .then((res) => {
+      .then(() => {
         history.push("/sign-in");
         setIsSuccess(true);
-        setIsInfoTooltipOpen(true);
       })
       .catch((err) => {
         console.log(err);
         setIsSuccess(false);
+      })
+      .finally(() => {
         setIsInfoTooltipOpen(true);
-      });
+      })
   }
 
   function handleLogin(email, password) {
@@ -221,7 +219,7 @@ export default function App() {
               <Login onLogin={handleLogin} />
             </Route>
             <Route path="*">
-              <Redirect to="/" />
+              <Redirect to="/sign-in" />
             </Route>
           </Switch>
 
