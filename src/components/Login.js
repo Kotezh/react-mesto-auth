@@ -48,11 +48,13 @@ function Login(props) {
                 required
                 minLength="2"
                 maxLength="40"
+                pattern="^(\w+([-.]\w+)*@\w+(\.\w{2,})+)$"
+                autoComplete="off"
               />
               <span
-                className="popup__error popup__error_visible"
+                className="popup__error"
                 id="email-error"
-              ></span>
+              >Некорректный формат email</span>
             </label>
             <label className="sign__form-field">
               <input
@@ -66,11 +68,13 @@ function Login(props) {
                 required
                 minLength="2"
                 maxLength="200"
+                pattern="^.{2,}$"
+                autoComplete="off"
               />
               <span
-                className="popup__error popup__error_visible"
+                className="popup__error"
                 id="password-error"
-              ></span>
+              >Заполните поле</span>
             </label>
             <button
               name="submit"

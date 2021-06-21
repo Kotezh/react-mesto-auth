@@ -47,11 +47,12 @@ export default function AddPlacePopup(props) {
           required
           minLength="2"
           maxLength="30"
+          pattern="^[a-zA-Zа-яёА-ЯЁ0-9]{3,29}$"
+          autoComplete="off"
         />
-        <span
-          className="popup__error popup__error_visible"
-          id="place-title-error"
-        ></span>
+        <span className="popup__error" id="place-title-error">
+          Поле должно содержать не менее 2 символов
+        </span>
       </label>
       <label className="popup__form-field">
         <input
@@ -63,11 +64,13 @@ export default function AddPlacePopup(props) {
           onChange={handleChange}
           placeholder="Ссылка на картинку"
           required
+          pattern="^https?:\/\/.+\.(jpg|jpeg|png|gif|bmp)$"
+          autoComplete="off"
         />
-        <span
-          className="popup__error popup__error_visible"
-          id="place-link-error"
-        ></span>
+        <span className="popup__error" id="place-link-error">
+          {" "}
+          Некорректная ссылка
+        </span>
       </label>
     </PopupWithForm>
   );

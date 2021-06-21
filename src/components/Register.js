@@ -45,11 +45,13 @@ export default function Register(props) {
                 required
                 minLength="2"
                 maxLength="40"
+                pattern="^(\w+([-.]\w+)*@\w+(\.\w{2,})+)$"
+                autoComplete="off"
               />
               <span
-                className="popup__error popup__error_visible"
+                className="popup__error"
                 id="email-error"
-              ></span>
+              >Некорректный формат email</span>
             </label>
             <label className="sign__form-field">
               <input
@@ -63,11 +65,13 @@ export default function Register(props) {
                 required
                 minLength="2"
                 maxLength="200"
+                pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                autoComplete="off"
               />
               <span
-                className="popup__error popup__error_visible"
+                className="popup__error"
                 id="password-error"
-              ></span>
+              >Заполните поле: Строчные и прописные латинские буквы, цифры, спецсимволы. Минимум 8 символов</span>
             </label>
             <button
               name="submit"

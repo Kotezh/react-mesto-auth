@@ -5,7 +5,12 @@ export default function ImagePopup(props) {
   const [name, setName] = useState("");
 
   const openedClass = props.card ? "popup_opened" : "";
-
+  function handleOverlayClick(evt) {
+    if(evt.target === evt.currentTarget){
+      props.onClose()
+    }
+  }
+  
   useEffect(() => {
     if(props.card) {
       setLink(props.card.link);
@@ -14,7 +19,7 @@ export default function ImagePopup(props) {
   }, [props.card]);
 
   return (
-    <section className={`popup popup_type_full-image ${openedClass}`}>
+    <section className={`popup popup_type_full-image ${openedClass}`} onClick={handleOverlayClick}>
       <div className="popup__full-image-wrapper">
         <figure className="popup__figure">
           <img className="popup__full-image" src={link} alt={name} />

@@ -1,8 +1,13 @@
 export default function PopupWithForm(props) {
   const openedClass = props.isOpen ? "popup_opened" : "";
+  function handleOverlayClick(evt) {
+    if(evt.target === evt.currentTarget){
+      props.onClose()
+    }
+  }
 
   return (
-    <section className={`popup popup_type_${props.name} ${openedClass}`}>
+    <section className={`popup popup_type_${props.name} ${openedClass}`} onClick={handleOverlayClick}>
       <div className="popup__container">
         {props.title && <h2 className="popup__title">{props.title}</h2>}
         <button

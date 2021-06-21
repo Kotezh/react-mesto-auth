@@ -20,7 +20,7 @@ export default function EditProfilePopup(props) {
     } else if (e.target.name === "job") {
       setDescription(e.target.value);
     }
-  }
+  }  
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -50,11 +50,12 @@ export default function EditProfilePopup(props) {
           required
           minLength="2"
           maxLength="40"
+          pattern="^[a-zA-Zа-яёА-ЯЁ0-9]{2,40}$"
+          autoComplete="off"
         />
-        <span
-          className="popup__error popup__error_visible"
-          id="name-error"
-        ></span>
+        <span className="popup__error" id="name-error">
+          Поле должно содержать не менее 2 символов
+        </span>
       </label>
       <label className="popup__form-field">
         <input
@@ -67,11 +68,12 @@ export default function EditProfilePopup(props) {
           required
           minLength="2"
           maxLength="200"
+          pattern="^[a-zA-Zа-яёА-ЯЁ0-9]{2,200}$"
+          autoComplete="off"
         />
-        <span
-          className="popup__error popup__error_visible"
-          id="job-error"
-        ></span>
+        <span className="popup__error" id="job-error">
+          Поле должно содержать не менее 2 символов
+        </span>
       </label>
     </PopupWithForm>
   );

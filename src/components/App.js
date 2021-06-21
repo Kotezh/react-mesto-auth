@@ -6,6 +6,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import ConfirmationPopup from "./ConfirmationPopup";
+import { ESC_KEYCODE } from "../utils/utils";
 import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/api";
@@ -26,6 +27,7 @@ export default function App() {
   });
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [deletedCard, setDeletedCard] = useState(null);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setISEditAvatarPopupOpen] = useState(false);
@@ -106,7 +108,10 @@ export default function App() {
     api
       .deleteCard(card._id)
       .then(() => {
-        setCards((cards) => cards.filter((currentCard) => currentCard._id !== card._id));
+        setCards((cards) =>
+          cards.filter((currentCard) => currentCard._id !== card._id)
+        );
+        closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
@@ -119,30 +124,45 @@ export default function App() {
       .then((newCard) => {
         setCards([newCard, ...cards]);
         setIsAddPlacePopupOpen(false);
+
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
+  function handleEscClose(evt) {
+    const key = evt.keyCode;
+    if (key === ESC_KEYCODE) {
+      closeAllPopups();
+    }
+  }
+
   function handleEditAvatarClick() {
     setISEditAvatarPopupOpen(true);
+    document.addEventListener("keydown", handleEscClose);
+    // popup.addEventListener("click", (evt) => handleOverlayClose(evt));
   }
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
+    document.addEventListener("keydown", handleEscClose);
   }
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
+    document.addEventListener("keydown", handleEscClose);
   }
 
-  function handleConfirmClick() {
+  function handleConfirmClick(card) {
     setIsConfirmPopupOpen(true);
+    setDeletedCard(card);
+    document.addEventListener("keydown", handleEscClose);
   }
 
   function handleCardClick(card) {
     setSelectedCard(card);
+    document.addEventListener("keydown", handleEscClose);
   }
 
   function closeAllPopups() {
@@ -152,6 +172,7 @@ export default function App() {
     setIsConfirmPopupOpen(false);
     setSelectedCard(null);
     setIsInfoTooltipOpen(false);
+    document.removeEventListener("keydown", handleEscClose);
   }
 
   function handleRegister(email, password) {
@@ -167,7 +188,7 @@ export default function App() {
       })
       .finally(() => {
         setIsInfoTooltipOpen(true);
-      })
+      });
   }
 
   function handleLogin(email, password) {
@@ -203,11 +224,10 @@ export default function App() {
               onEditAvatar={handleEditAvatarClick}
               onEditProfile={handleEditProfileClick}
               onAddPlace={handleAddPlaceClick}
-              onConfirm={handleConfirmClick}
               onCardClick={handleCardClick}
               onClose={closeAllPopups}
               onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
+              onCardDelete={handleConfirmClick}
               cards={cards}
               loggedIn={email ? true : false}
             />
@@ -248,6 +268,8 @@ export default function App() {
           <ConfirmationPopup
             isOpen={isConfirmPopupOpen}
             onClose={closeAllPopups}
+            card={deletedCard}
+            onCardDelete={handleCardDelete}
           />
         </div>
       </div>
